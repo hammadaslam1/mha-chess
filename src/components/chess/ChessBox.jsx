@@ -1,29 +1,51 @@
-import Brightness1Icon from "@mui/icons-material/Brightness1";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import Pawn from '../../icons/Pawn.png'
+import Pawn from "../../icons/Pawn.png";
+import Draggable from "react-draggable";
 
-const ChessBox = ({ ind, value, handlePosition }) => {
-  const position = useSelector((state) => state.ChessReducer.position);
-  const pos = ind;
+const ChessBox = ({
+  ind,
+  handlePosition,
+  handlePawnPosition,
+  position
+}) => {
+
   return (
     <div
       key={ind}
       style={{
         height: "100%",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        cursor: "pointer",
+
         backgroundColor:
-          ((pos % 8) + parseInt(pos / 8)) % 2 == 0 ? "#dd9060" : "#c96634",
+          ((ind % 8) + parseInt(ind / 8)) % 2 == 0 ? "#dd9060" : "#c96634",
         color: "white",
       }}
-      onClick={() => {
-          console.log(ind);
-        handlePosition(pos);
-      }}
     >
-      {position===pos ? <img src={Pawn} /> : ""}
+      {position === ind ? (
+        <Draggable
+          // bounds={{ top: -80, left: -80, right: 80, bottom: 80 }}
+          grid={[81, 81]}
+          onDrag={handlePawnPosition}
+          onStart={()=>{
+            console.log('start');
+          }}
+          onMouseDown={()=>{
+            console.log('mouseDown');
+          }}
+          onStop={() => {
+            handlePosition(ind);
+            console.log('hgvh ',ind);
+          }}
+        >
+          <img bounds="parent" src={Pawn} />
+        </Draggable>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
