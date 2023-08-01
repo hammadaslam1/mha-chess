@@ -29,7 +29,9 @@ const ChessBox = ({
         <Draggable
           // bounds={{ top: -80, left: -80, right: 80, bottom: 80 }}
           grid={[81, 81]}
+          // bounds={{ top:-81, bottom : 81, left: -81, right:81}}
           onDrag={handlePawnPosition}
+          
           onStart={()=>{
             console.log('start');
           }}
@@ -38,7 +40,7 @@ const ChessBox = ({
           }}
           onStop={() => {
             handlePosition(ind);
-            console.log('hgvh ',ind);
+            console.log('stop ',ind);
           }}
         >
           <img bounds="parent" src={Pawn} />

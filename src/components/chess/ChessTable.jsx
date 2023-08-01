@@ -25,7 +25,7 @@ const Chess = () => {
       y: pawnPosition.y + loc.deltaY,
     });
 
-    console.log(parseInt(loc.deltaX / 81), parseInt(loc.deltaY / 81));
+    // console.log(parseInt(loc.deltaX / 81), parseInt(loc.deltaY / 81));
   };
   return (
     <>
